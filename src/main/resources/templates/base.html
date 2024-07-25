@@ -28,7 +28,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a th:href="@{/}" class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                    <a th:href="@{/home}" class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">
@@ -40,13 +40,15 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/signup/}" href="#" tabindex="-1" area-disabled="true">SIGN UP</a>
+                    <a class="nav-link" th:href="@{/signup}" href="#" tabindex="-1" area-disabled="true">SIGN UP</a>
                 </li>
             </ul>
 
         </div>
     </nav>
     <!-- end of navbar -->
+
+
 
     <div th:replace="${content}"></div>
 

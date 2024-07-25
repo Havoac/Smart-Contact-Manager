@@ -13,31 +13,44 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="my-card mt-3">
+                        <div th:if="${message}" th:classappend="${message.type}" class="alert" role="alert">
+                            <p th:text="${message.content}"></p>
+                        </div>
+
                         <h1 class="text-center">Register Here</h1>
-                        <form action="" th:action="@{/do_register}" method="post" >
+                        <form action="" th:action="@{/do_register}" method="post" th:object="${user}">
                             <!-- name -->
                             <div class="form-group">
                                 <label for="name_field">Your Name</label>
-                                <input type="text" class="form-control" id="name_field" placeholder="Enter name here ..." required="required">
+                                <input name="name" type="text" class="form-control" id="name_field"
+                                    placeholder="Enter name here ..." required="required" th:value="${user.name}">
                             </div>
 
                             <!-- email -->
-
                             <div class="form-group">
                                 <label for="email_field">Your email address</label>
-                                <input type="email" class="form-control" id="email_field" placeholder="name@example.com" required="required">
+                                <input name="email" type="email" class="form-control" id="email_field" placeholder="name@example.com"
+                                    required="required" th:value="${user.email}">
                             </div>
 
                             <!-- password -->
                             <div class="form-group">
                                 <label for="password_field">Your Password</label>
-                                <input type="password" class="form-control" id="password_field" placeholder="Enter password here ..." required="required">
+                                <input name="password" type="password" class="form-control" id="password_field"
+                                    placeholder="Enter password here ..." required="required">
                             </div>
 
                             <!-- about -->
                             <div class="form-group">
                                 <label for="about_field">About</label>
-                                <textarea class="form-control" id="about_field" rows="7" placeholder="Enter something yourself"></textarea>
+                                <textarea name="about" class="form-control" id="about_field" rows="7"
+                                    placeholder="Enter something yourself" th:value="${user.about}"></textarea>
+                            </div>
+
+                            <!-- terms and condition agreement -->
+                            <div class="form-group form-check text-center">
+                                <input type="checkbox" name="agreement" class="form-check-input" id="agreement" />
+                                <label for="agreement">Accept terms and conditions</label>
                             </div>
 
                             <div class="container text-center">
