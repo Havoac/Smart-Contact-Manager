@@ -22,15 +22,19 @@
                             <!-- name -->
                             <div class="form-group">
                                 <label for="name_field">Your Name</label>
-                                <input name="name" type="text" class="form-control" id="name_field"
-                                    placeholder="Enter name here ..." required="required" th:value="${user.name}">
+                                <input name="name" type="text" class="form-control"
+                                    th:classappend="${#fields.hasErrors('name') ? 'is-invalid' : ''}" id="name_field"
+                                    placeholder="Enter name here ..." th:value="${user.name}">
+
+                                <div class="invalid-feedback" th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                </div>
                             </div>
 
                             <!-- email -->
                             <div class="form-group">
                                 <label for="email_field">Your email address</label>
-                                <input name="email" type="email" class="form-control" id="email_field" placeholder="name@example.com"
-                                    required="required" th:value="${user.email}">
+                                <input name="email" type="email" class="form-control" id="email_field"
+                                    placeholder="name@example.com" required="required" th:value="${user.email}">
                             </div>
 
                             <!-- password -->
