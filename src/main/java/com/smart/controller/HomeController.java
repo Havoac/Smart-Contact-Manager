@@ -1,6 +1,7 @@
 package com.smart.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,9 @@ import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class HomeController {
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
     @Autowired
     private UserRepository userRepository;
 
@@ -47,10 +51,11 @@ public class HomeController {
             if (!agreement)
                 throw new Exception("You have not agreed to terms and conditions");
 
-            user.setRole("Role");
+            user.setRole("ROLE_USER");
             user.setEnabled(true);
 
-            System.out.println(user);
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            // System.out.println("Encoded Password: " + user.getPassword());
 
             User result = this.userRepository.save(user);
 
