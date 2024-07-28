@@ -43,7 +43,8 @@ public class MyConfig {
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/**").permitAll())
                 .formLogin(form -> form
-                        .loginPage("/signin"))
+                        .loginPage("/signin").loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index")
+                        .failureUrl("/login-fail"))
                 .authenticationProvider(authenticationProvider());
 
         return http.build();
