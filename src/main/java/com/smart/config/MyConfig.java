@@ -42,7 +42,8 @@ public class MyConfig {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/**").permitAll())
-                .formLogin(withDefaults())
+                .formLogin(form -> form
+                        .loginPage("/signin"))
                 .authenticationProvider(authenticationProvider());
 
         return http.build();

@@ -55,7 +55,8 @@ public class HomeController {
             user.setEnabled(true);
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            // System.out.println("Encoded Password: " + user.getPassword());
+            // System.out.println("Encoded Password: " +
+            // passwordEncoder.encode(user.getPassword()));
 
             User result = this.userRepository.save(user);
 
@@ -75,5 +76,11 @@ public class HomeController {
         }
 
         return "signup";
+    }
+
+    @RequestMapping("/signin")
+    public String customLogin(Model model) {
+        model.addAttribute("title", "Login Page");
+        return "login";
     }
 }
