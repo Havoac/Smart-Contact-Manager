@@ -9,8 +9,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 public class MyConfig {
@@ -43,8 +41,7 @@ public class MyConfig {
                         .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/**").permitAll())
                 .formLogin(form -> form
-                        .loginPage("/signin").loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index")
-                        .failureUrl("/login-fail"))
+                        .loginPage("/signin").loginProcessingUrl("/dologin").defaultSuccessUrl("/user/index"))
                 .authenticationProvider(authenticationProvider());
 
         return http.build();
