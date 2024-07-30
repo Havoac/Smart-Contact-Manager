@@ -1,17 +1,28 @@
 package com.smart.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.smart.dao.UserRepository;
 import com.smart.entities.Contact;
 import com.smart.entities.User;
+import com.smart.helper.Message;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -47,15 +58,43 @@ public class UserController {
 
     // processing add contact form
     @PostMapping("/process-contact")
-    public String processContact(@ModelAttribute Contact contact, Principal principal) {
-        String name = principal.getName();
-        User user = this.userRepository.getUserByUserName(name);
+    public String processContact(@ModelAttribute Contact contact,
+            @RequestParam("profileImage") MultipartFile file, Principal principal, HttpSession session, Model model) {
+        try {
+            String name = principal.getName();
+            User user = this.userRepository.getUserByUserName(name);
 
-        contact.setUser(user);
-        user.getContacts().add(contact);
+            // processing and uploading the file
+            if (!file.isEmpty()) {
+                contact.setImage(file.getOriginalFilename());
 
-        // saving to database
-        this.userRepository.save(user);
+                File saveFile = new ClassPathResource("/static/img").getFile();
+                Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            contact.setUser(user);
+            user.getContacts().add(contact);
+
+            // saving to database
+            this.userRepository.save(user);
+
+            // successfull message
+            session.setAttribute("message", new Message("Your Contact is added !! Add more", "success"));
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            e.printStackTrace();
+
+            // error message
+            session.setAttribute("message", new Message("Something went wrong !! Try again", "danger"));
+        }
+
+        // removing the message alert, i.e, if we move to other pages from there, the
+        // alert message is still visible
+        if (session.getAttribute("message") != null) {
+            model.addAttribute("message", session.getAttribute("message"));
+            session.removeAttribute("message");
+        }
 
         return "normal/add_contact_form";
     }
