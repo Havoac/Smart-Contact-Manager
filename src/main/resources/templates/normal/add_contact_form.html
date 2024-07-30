@@ -26,7 +26,7 @@
                                         </div>
                                     </div>
                                     <input type="text" id="firstName" name="name" placeholder="Enter name here"
-                                        class="form-control">
+                                        class="form-control" required>
                                 </div>
 
                                 <!-- Second Name -->
@@ -47,8 +47,8 @@
                                             <i class="fa fa-phone"></i>
                                         </div>
                                     </div>
-                                    <input type="text" id="phone" name="phone"
-                                        placeholder="Enter Phone Number here" class="form-control">
+                                    <input type="text" id="phone" name="phone" placeholder="Enter Phone Number here"
+                                        class="form-control" required>
                                 </div>
 
                                 <!-- Email -->
@@ -58,8 +58,8 @@
                                             @
                                         </div>
                                     </div>
-                                    <input type="email" id="email" name="email"
-                                        placeholder="Enter email-id here" class="form-control">
+                                    <input type="email" id="email" name="email" placeholder="Enter email-id here"
+                                        class="form-control" required>
                                 </div>
 
                                 <!-- Work -->
@@ -69,23 +69,24 @@
                                             <i class="fa fa-briefcase"></i>
                                         </div>
                                     </div>
-                                    <input type="text" id="work" name="work"
-                                        placeholder="Enter about work here" class="form-control">
+                                    <input type="text" id="work" name="work" placeholder="Enter about work here"
+                                        class="form-control">
                                 </div>
 
                                 <!-- Contact Description -->
-                                 <div class="form-group mt-3">
-                                    <textarea placeholder="Enter Contact Description" name="description" id="description" class="form-control" rows="20"></textarea>
-                                 </div>
+                                <div class="form-group mt-3">
+                                    <textarea id="mytextarea" placeholder="Enter Contact Description" name="description"
+                                        class="form-control" rows="20"></textarea>
+                                </div>
 
                                 <!-- Contact Image -->
-                                 <div class="custom-file">
+                                <div class="custom-file">
                                     <input type="file" name="profileImage" />
-                                 </div>
+                                </div>
 
-                                 <div class="container text-center mb-10">
-                                    <button class="btn btn-outline-primary" >Save Contact</button>
-                                 </div>
+                                <div class="container text-center mb-10">
+                                    <button class="btn btn-outline-primary">Save Contact</button>
+                                </div>
 
                             </form>
                         </div>
@@ -93,6 +94,26 @@
                 </div>
             </div>
         </div>
+        <!-- Place the first <script> tag in your HTML's <head> -->
+        <script src="https://cdn.tiny.cloud/1/rtgxuzb3xwv0v91jbzjs8rbbomkg82hc0jy5ue0f2opz18ko/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+        <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            });
+        </script>
+        
     </section>
 </body>
 
