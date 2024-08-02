@@ -12,5 +12,6 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
     @Query("from Contact as c where c.user.id =:userId")
     // currentPage-page
     // contact Per page 5
+    // pageable parameter is compulsory since return type is for Pageable query
     public Page<Contact> findContactsByUser(@Param("userId") int userId, Pageable pageable);
 }

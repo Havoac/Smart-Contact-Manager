@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -109,7 +108,7 @@ public class UserController {
     }
 
     // show contacts handler
-    // per page = 5[n]
+    // per page = 2[n]
     // current page = 0 [page]
     @GetMapping("/show-contacts/{page}")
     public String showContacts(@PathVariable("page") Integer page, Model model, Principal principal) {
