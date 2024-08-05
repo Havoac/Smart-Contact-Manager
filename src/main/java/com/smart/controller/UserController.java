@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -79,6 +80,8 @@ public class UserController {
                 File saveFile = new ClassPathResource("/static/img").getFile();
                 Path path = Paths.get(saveFile.getAbsolutePath() + File.separator + file.getOriginalFilename());
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            } else {
+                contact.setImage("null_profile.png");
             }
 
             contact.setUser(user);
@@ -126,5 +129,16 @@ public class UserController {
         model.addAttribute("totalPages", contacts.getTotalPages());
 
         return "normal/show_contacts";
+    }
+
+    // showing particular contact details
+    @RequestMapping("/contact/{cId}")
+    public String ShowContactDetail(@PathVariable("cId") Integer cId, Model model) {
+        Optional<Contact> contactOptional = this.contactRepository.findById(cId);
+        Contact contact = contactOptional.get();
+
+        model.addAttribute("contact", contact);
+
+        return "normal/contact_detail";
     }
 }
