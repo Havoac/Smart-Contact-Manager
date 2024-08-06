@@ -1,5 +1,6 @@
 package com.smart.controller;
 
+import java.io.Console;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -133,11 +134,19 @@ public class UserController {
 
     // showing particular contact details
     @RequestMapping("/contact/{cId}")
-    public String ShowContactDetail(@PathVariable("cId") Integer cId, Model model) {
+    public String ShowContactDetail(@PathVariable("cId") Integer cId, Model model, Principal principal) {
         Optional<Contact> contactOptional = this.contactRepository.findById(cId);
-        Contact contact = contactOptional.get();
 
-        model.addAttribute("contact", contact);
+        Contact contact = contactOptional.get();
+        // Contact contact = this.contactRepository.getById(cId);
+
+        String username = principal.getName();
+        User user = this.userRepository.getUserByUserName(username);
+
+        if (user.getId() == contact.getUser().getId()) {
+            model.addAttribute("contact", contact);
+            model.addAttribute("title", contact.getName());
+        }
 
         return "normal/contact_detail";
     }
