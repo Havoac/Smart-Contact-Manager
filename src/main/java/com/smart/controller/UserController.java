@@ -1,6 +1,5 @@
 package com.smart.controller;
 
-import java.io.Console;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.smart.dao.ContactRepository;
 import com.smart.dao.UserRepository;
@@ -149,5 +149,29 @@ public class UserController {
         }
 
         return "normal/contact_detail";
+    }
+
+    // delete contact handler
+    @GetMapping("/delete_contact/{cId}")
+    public String DeleteContact(@PathVariable("cId") Integer cId, Model model, Principal principal,
+            HttpSession session, RedirectAttributes redirectAttributes) {
+        Contact contact = this.contactRepository.getById(cId); // it is depreciated
+
+        String username = principal.getName();
+        User user = this.userRepository.getUserByUserName(username);
+
+        int userId = user.getId();
+        int contactUserId = contact.getUser().getId();
+
+        contact.setUser(null); // user is linked to contact, so had to set it to null to delete it
+
+        if (userId == contactUserId) {
+            this.contactRepository.delete(contact);
+            redirectAttributes.addFlashAttribute("message", new Message("Contact deleted successfully....", "success"));
+        } else {
+            redirectAttributes.addFlashAttribute("message", new Message("Something went wrong !! Try again", "danger"));
+        }
+
+        return "redirect:/user/show-contacts/0";
     }
 }
