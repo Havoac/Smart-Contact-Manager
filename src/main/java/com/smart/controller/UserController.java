@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.smart.dao.ContactRepository;
 import com.smart.dao.UserRepository;
 import com.smart.entities.Contact;
@@ -173,5 +174,17 @@ public class UserController {
         }
 
         return "redirect:/user/show-contacts/0";
+    }
+
+    // update contact handler
+    @PostMapping("/update-contact/{cId}")
+    public String UpdateContact(@PathVariable("cId") Integer cId, Model model) {
+        model.addAttribute("title", "Update Contact");
+
+        Contact contact = this.contactRepository.findById(cId).get();
+
+        model.addAttribute("contact", contact);
+
+        return "normal/update_form";
     }
 }

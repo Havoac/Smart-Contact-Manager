@@ -42,7 +42,10 @@
                         </tbody>
                     </table>
 
-                    <button class="btn btn-danger mt-1 ">Delete</button>
+                    <a href="#" th:onclick="|deleteContact(${contact.cId})|">
+                        <button class="btn btn-danger mt-1">Delete</button>
+                    </a>
+                    
                     <button class="btn btn-primary mt-1">Update</button>
                 </div>
             </div>

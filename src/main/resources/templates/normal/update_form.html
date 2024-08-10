@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <section>
+        <div class="card mr-3 ml-3">
+            <div class="card-body">
+                <h1 class="text-center">Update your Contact</h1>
+                <div class="container-fluid mt-1">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-1">
+                            <form action="" th:object="${contact}" enctype="multipart/form-data" method="POST"
+                                th:action="@{/user/process-update}" class="mt-2">
+
+                                <!-- first Name -->
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                    </div>
+                                    <input th:value="${contact.name}" type="text" id="firstName" name="name"
+                                        placeholder="Enter name here" class="form-control" required>
+                                </div>
+
+                                <!-- Second Name -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input th:value="${contact.secondName}" type="text" id="secondName"
+                                        name="secondName" placeholder="Enter Nick Name here" class="form-control">
+                                </div>
+
+                                <!-- Phone  -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                    </div>
+                                    <input th:value="${contact.phone}" type="text" id="phone" name="phone"
+                                        placeholder="Enter Phone Number here" class="form-control" required>
+                                </div>
+
+                                <!-- Email -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text font-weight-bold">
+                                            @
+                                        </div>
+                                    </div>
+                                    <input th:value="${contact.email}" type="email" id="email" name="email"
+                                        placeholder="Enter email-id here" class="form-control" required>
+                                </div>
+
+                                <!-- Work -->
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <input th:value="${contact.work}" type="text" id="work" name="work"
+                                        placeholder="Enter about work here" class="form-control">
+                                </div>
+
+                                <!-- Contact Description -->
+                                <div class="form-group mt-3">
+                                    <textarea th:text="${contact.description}" id="mytextarea"
+                                        placeholder="Enter Contact Description" name="description" class="form-control"
+                                        rows="20"></textarea>
+                                </div>
+
+                                <!-- Contact Image -->
+                                <div class="container text-center">
+                                    <img style="width:100px;height: 100px;" class="img-fluid my_profile_picture" src=""
+                                        th:src="@{'/img/'+${contact.image}}" alt="Profile Picture" />
+                                </div>
+
+                                <div class="custom-file">
+                                    <input type="file" name="profileImage" />
+                                </div>
+
+                                <div class="container text-center mb-10">
+                                    <button class="btn btn-outline-primary">Save Contact</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Place the first <script> tag in your HTML's <head> -->
+        <script src="https://cdn.tiny.cloud/1/rtgxuzb3xwv0v91jbzjs8rbbomkg82hc0jy5ue0f2opz18ko/tinymce/7/tinymce.min.js"
+            referrerpolicy="origin"></script>
+
+        <!-- Place the following <script> and <textarea> tags your HTML's <body> -->
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss markdown',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                mergetags_list: [
+                    { value: 'First.Name', title: 'First Name' },
+                    { value: 'Email', title: 'Email' },
+                ],
+                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+            });
+        </script>
+    </section>
+
+</body>
+
+</html>
