@@ -28,7 +28,8 @@
                         <tr th:each="c : ${contacts}">
                             <th scope="row" th:text="${'SCM' + c.cId}"></th>
                             <td>
-                                <img src="" class="my_profile_picture" th:src="@{'/img/' + ${c.image}}" alt="profile_photo" />
+                                <img src="" class="my_profile_picture" th:src="@{'/img/' + ${c.image}}"
+                                    alt="profile_photo" />
                                 <span th:text="${c.name}"></span>
                             </td>
                             <td th:text="${c.email}"></td>
@@ -41,7 +42,7 @@
                                 <form method="post" th:action="@{'/user/update-contact/' + ${c.cId}}">
                                     <button class="btn btn-primary btn-sm mt-1">Update</button>
                                 </form>
-                                
+
                                 <a href="" th:href="@{'/user/contact/' + ${c.cId}}">
                                     <button class="btn btn-info btn-sm mt-1">View</button>
                                 </a>
@@ -60,13 +61,17 @@
                             </a>
                         </li>
 
-                        <li th:classappend="${currentPage == i ? 'active':''}" th:each="i : ${#numbers.sequence(0, totalPages-1)}" class="page-item">
+                        <li th:classappend="${currentPage == i ? 'active':''}"
+                            th:each="i : ${#numbers.sequence(0, totalPages-1 >= 0 ? totalPages-1 : 0)}"
+                            class="page-item">
                             <a th:href="@{'/user/show-contacts/'+${i}}" class="page-link" href="#">
                                 <span th:text="${i}"></span>
                             </a>
                         </li>
 
-                        <li th:if="${currentPage+1 != totalPages}" class="page-item"><a th:href="@{'/user/show-contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a></li>
+                        <li th:if="${currentPage+1 != totalPages and totalPages!=0}" class="page-item"><a
+                                th:href="@{'/user/show-contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a>
+                        </li>
                     </ul>
                 </nav>
             </div>
