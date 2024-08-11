@@ -228,4 +228,17 @@ public class UserController {
 
         return "redirect:/user/contact/" + contact.getcId();
     }
+
+    // your profile handler
+    @GetMapping("/profile")
+    public String YourProfile(Model model, Principal principal) {
+        model.addAttribute("title", "Profile Page");
+        String userName = principal.getName(); // username - email
+        User user = userRepository.getUserByUserName(userName);
+
+        if (user.getImageUrl() == null)
+            user.setImageUrl("null_profile.png");
+
+        return "normal/profile";
+    }
 }

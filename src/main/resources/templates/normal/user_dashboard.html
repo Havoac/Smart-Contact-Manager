@@ -7,7 +7,21 @@
 </head>
 <body>
     <section>
-        <h1>Private DashBoard</h1>
+        <div class="container">
+            <div class="card mt-2">
+                <div class="card-body">
+                    <div class="user_info text-center">
+                        <img src="" style="height: 200px; width: 200px;" class="my_profile_picture"
+                            th:src="@{'/img/contact_logo.png'}" alt="profile_photo" />
+                        
+                        <h1 class="text-center mt-5">Start Adding your contact on web</h1>
+                    </div>
+                    <form method="post" th:action="@{'/user/add-contact'}" class="text-center mt-5">
+                        <button class="btn bg-primary btn-lg text-white">Add new Contact</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 </body>
 </html>
