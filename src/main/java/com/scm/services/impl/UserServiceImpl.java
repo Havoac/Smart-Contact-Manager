@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
         oldUser.setAbout(newUser.getAbout());
         oldUser.setEmail(newUser.getEmail());
-        oldUser.setUserName(newUser.getUserName());
+        oldUser.setName(newUser.getName());
         oldUser.setPassword(newUser.getPassword());
         oldUser.setProfilePic(newUser.getProfilePic());
         oldUser.setEmailVerified(newUser.isEmailVerified());

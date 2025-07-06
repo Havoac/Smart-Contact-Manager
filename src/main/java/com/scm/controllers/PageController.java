@@ -64,7 +64,7 @@ public class PageController {
         // save the data to database
         User user = new User();
 
-        user.setUserName(userForm.getUserName());
+        user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
         user.setPhoneNo(userForm.getAbout());
