@@ -1,5 +1,6 @@
 package com.scm.forms;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -17,6 +18,7 @@ import lombok.ToString;
 public class UserForm {
     @NotBlank(message = "User name is required")
     @Size(min = 3, message = "Minimum size should be 3")
+    @Column(name = "user_name", nullable = false)
     private String name;
 
     @NotBlank(message = "Email is required")

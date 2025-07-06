@@ -22,6 +22,11 @@ public class PageController {
     @Autowired
     UserService userService;
 
+    @RequestMapping("/")
+    public String Index() {
+        return "redirect:/home";
+    }
+
     @RequestMapping("/home")
     public String Home(Model model) {
         model.addAttribute("home", "Welcome to the home page");
@@ -63,6 +68,8 @@ public class PageController {
 
         // save the data to database
         User user = new User();
+
+        System.out.println(userForm.toString());
 
         user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());

@@ -37,7 +37,7 @@ public class User implements UserDetails {
     @Id
     private String userId;
 
-    @Column(nullable = false)
+    @Column(name = "user_name", nullable = false)
     private String name;
 
     @Column(unique = true, nullable = false)
@@ -52,6 +52,9 @@ public class User implements UserDetails {
     private String phoneNo;
     @Column(length = 100)
     private String about;
+
+    @Column(name = "enabled")
+    private boolean enabled = true;
 
     private boolean phoneVerified = false;
     private boolean emailVerified = false;
@@ -86,5 +89,4 @@ public class User implements UserDetails {
     public String getPassword() {
         return this.password;
     }
-
 }
