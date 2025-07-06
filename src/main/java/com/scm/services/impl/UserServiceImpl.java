@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.scm.constants.AppConstants;
 import com.scm.entities.User;
 import com.scm.exceptions.UserNotFoundException;
 import com.scm.repositories.UserRepo;
@@ -16,10 +18,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User SaveUser(User user) {
         String userId = UUID.randomUUID().toString();
         user.setUserId(userId);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        user.setRoleList(List.of(AppConstants.ROLE_USER));
+
         return userRepo.save(user);
     }
 
