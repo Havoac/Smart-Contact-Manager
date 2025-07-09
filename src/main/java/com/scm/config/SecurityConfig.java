@@ -15,18 +15,9 @@ import com.scm.services.impl.SecurityCustomUserDetailService;
 
 @Configuration
 public class SecurityConfig {
-    // user create and login using java with in memory service
-    // @Bean
-    // public UserDetailsService userDetailsService() {
-    // UserDetails user =
-    // User.withDefaultPasswordEncoder().username("admin").password("admin").roles("ADMIN").build();
-
-    // var inMemoryUserDetailsManager = new InMemoryUserDetailsManager(user);
-    // return inMemoryUserDetailsManager;
-    // }
 
     @Autowired
-    private SecurityCustomUserDetailService userDetailService;
+    private SecurityCustomUserDetailService userDetailService; // to load data from database
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -42,15 +33,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         // configuration
         // url configuration (public and private)
-        // httpSecurity.authorizeHttpRequests(authorize -> {
-        // authorize.requestMatchers("/user/**").authenticated()
-        // .requestMatchers("/do-register", "/register", "/css/**", "/js/**",
-        // "/images/**").permitAll();
-        // authorize.anyRequest().permitAll();
-        // });
 
         // form default login
-        // to change anything related to form, we will come here
+        // to change anything related to form, we will come here to
         // httpSecurity.formLogin(Customizer.withDefaults());
 
         httpSecurity
@@ -60,8 +45,7 @@ public class SecurityConfig {
                             .permitAll();
                     authorize.anyRequest().permitAll();
                 })
-                .formLogin(Customizer.withDefaults())
-                .csrf().disable(); // ⛔ Use only in dev
+                .formLogin(Customizer.withDefaults());
 
         return httpSecurity.build();
     }
