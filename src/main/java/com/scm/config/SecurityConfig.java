@@ -15,6 +15,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.OrRequestMatcher;
 
 import com.scm.services.impl.SecurityCustomUserDetailService;
 
@@ -63,10 +65,13 @@ public class SecurityConfig {
 
                 });
 
-        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        // httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.logout(logoutForm -> {
-            logoutForm.logoutUrl("/logout");
-            logoutForm.logoutSuccessUrl("/login?logout=true");
+            logoutForm
+                    .logoutRequestMatcher(new OrRequestMatcher(
+                            new AntPathRequestMatcher("/logout", "POST"),
+                            new AntPathRequestMatcher("/logout", "GET")))
+                    .logoutSuccessUrl("/login?logout=true");
         });
 
         return httpSecurity.build();

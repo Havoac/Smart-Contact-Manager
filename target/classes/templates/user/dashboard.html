@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>This is user Dashboard</h1>
-    <a data-th-href="@{'/logout'}">Logout</a>
-</body>
+    <form th:action="@{/logout}" method="post" style="display: inline">
+      <input
+        type="hidden"
+        th:name="${_csrf.parameterName}"
+        th:value="${_csrf.token}"
+      />
+      <button type="submit">Logout</button>
+    </form>
+  </body>
 </html>
