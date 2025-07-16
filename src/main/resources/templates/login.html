@@ -29,8 +29,12 @@
               Start managing contacts on cloud ...
             </p>
 
-            <div class="text-red-600 text-center" th:if="${param.error}">Invalid username and password.</div>
-            <div class="text-green-600 text-center" th:if="${param.logout}">You have been logged out.</div>
+            <div class="text-red-600 text-center" th:if="${param.error}">
+              Invalid username and password.
+            </div>
+            <div class="text-green-600 text-center" th:if="${param.logout}">
+              You have been logged out.
+            </div>
 
             <form th:action="@{/authentication}" method="post" class="mt-5">
               <!-- email field -->
@@ -92,6 +96,14 @@
                 </button>
               </div>
             </form>
+
+            <div
+              class="social-buttons-container flex justify-center mt-5"
+            >
+              <a class="login-with-google-btn" data-th-href="@{'/oauth2/authorization/google'}">
+                Login with Google
+              </a>
+            </div>
           </div>
         </div>
       </div>

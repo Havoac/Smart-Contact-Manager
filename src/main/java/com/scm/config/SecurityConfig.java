@@ -30,6 +30,9 @@ public class SecurityConfig {
     @Autowired
     private SecurityCustomUserDetailService userDetailService; // to load data from database
 
+    @Autowired
+    private OAuthAuthenticationSuccessHandler oAuthAuthenticationSuccessHandler;
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
@@ -72,6 +75,11 @@ public class SecurityConfig {
                             new AntPathRequestMatcher("/logout", "POST"),
                             new AntPathRequestMatcher("/logout", "GET")))
                     .logoutSuccessUrl("/login?logout=true");
+        });
+
+        httpSecurity.oauth2Login(oauth -> {
+            oauth.loginPage("/login");
+            oauth.successHandler(oAuthAuthenticationSuccessHandler);
         });
 
         return httpSecurity.build();
