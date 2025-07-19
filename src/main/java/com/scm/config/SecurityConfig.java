@@ -61,14 +61,13 @@ public class SecurityConfig {
                 .formLogin(formLogin -> {
                     formLogin.loginPage("/login");
                     formLogin.loginProcessingUrl("/authentication");
-                    formLogin.defaultSuccessUrl("/user/dashboard", true);
+                    formLogin.defaultSuccessUrl("/user/profile", true);
                     formLogin.failureForwardUrl("/login?error=true");
                     formLogin.usernameParameter("email");
                     formLogin.passwordParameter("password");
 
                 });
 
-        // httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.logout(logoutForm -> {
             logoutForm
                     .logoutRequestMatcher(new OrRequestMatcher(

@@ -82,7 +82,7 @@ public class PageController {
         user.setName(userForm.getName());
         user.setEmail(userForm.getEmail());
         user.setPassword(userForm.getPassword());
-        user.setPhoneNo(userForm.getAbout());
+        user.setPhoneNo(userForm.getPhoneNo());
         user.setAbout(userForm.getAbout());
 
         userService.SaveUser(user);

@@ -47,6 +47,10 @@
               data-th-object="${userForm}"
               novalidate
             >
+
+            <!-- This is the crucial line for CSRF protection -->
+              <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
               <!-- name  -->
               <div class="mb-3">
                 <label
