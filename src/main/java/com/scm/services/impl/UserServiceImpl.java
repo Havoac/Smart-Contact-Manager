@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.scm.constants.AppConstants;
 import com.scm.entities.User;
-import com.scm.exceptions.ResourceNotFoundException;
 import com.scm.exceptions.UserNotFoundException;
 import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
