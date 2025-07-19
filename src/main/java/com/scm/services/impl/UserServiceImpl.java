@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.scm.constants.AppConstants;
 import com.scm.entities.User;
+import com.scm.exceptions.ResourceNotFoundException;
 import com.scm.exceptions.UserNotFoundException;
 import com.scm.repositories.UserRepo;
 import com.scm.services.UserService;
@@ -73,6 +74,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> GetAllUsers() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email)
+                .orElse(null);
     }
 
 }

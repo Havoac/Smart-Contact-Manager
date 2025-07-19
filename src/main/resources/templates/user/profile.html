@@ -7,6 +7,7 @@
   </head>
   <body>
     <h1>This is user Profile</h1>
+    <h1 data-th-text="${loggedInUser.name}"></h1>
     <form th:action="@{/logout}" method="post" style="display: inline">
       <input
         type="hidden"
