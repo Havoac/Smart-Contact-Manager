@@ -8,10 +8,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title data-th-replace="${title}"></title>
+
+    <!-- Flowbite css -->
     <link
       href="https://cdn.jsdelivr.net/npm/flowbite@3.0.0/dist/flowbite.min.css"
       rel="stylesheet"
     />
+
+    <!-- Font awesome css -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -19,6 +23,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <!-- Custom css -->
     <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
   </head>
   <body class="dark:bg-gray-900 dark:text-white">
@@ -27,5 +33,5 @@
     <div data-th-replace="${end}"></div>
     <!-- <div th:replace="~{footer :: footer_fragment}"></div> -->
   </body>
-  <script src="/js/Theme.js"></script>
+  <script src="/js/Theme.js"></script> 
 </html>

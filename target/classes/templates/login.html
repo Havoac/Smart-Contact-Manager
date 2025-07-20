@@ -97,10 +97,53 @@
               </div>
             </form>
 
-            <div
-              class="social-buttons-container flex justify-center mt-5"
-            >
-              <a class="login-with-google-btn" data-th-href="@{'/oauth2/authorization/google'}">
+            <div class="social-buttons-container flex justify-center mt-5">
+              <a
+                data-th-href="@{'/oauth2/authorization/google'}"
+                style="
+                  background-color: #ffffff !important; /* White background */
+                  color: #424242 !important; /* Dark gray text */
+                  padding: 10px 20px !important;
+                  border-radius: 8px !important; /* Slightly more rounded corners */
+                  font-size: 16px !important;
+                  font-weight: 500 !important; /* Medium font weight */
+                  text-decoration: none !important; /* Remove underline for links */
+                  display: inline-flex !important; /* Allows padding and alignment */
+                  align-items: center !important;
+                  justify-content: center !important;
+                  gap: 8px !important; /* Space between icon and text */
+                  border: 1px solid #dadce0 !important; /* Subtle border */
+                  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1) !important; /* Softer shadow */
+                  transition: all 0.2s ease-in-out !important; /* Smooth transitions for all properties */
+                  cursor: pointer !important;
+                "
+                onmouseover="this.style.backgroundColor='#f0f0f0'; this.style.boxShadow='0 3px 6px rgba(0,0,0,0.15)'"
+                onmouseout="this.style.backgroundColor='#ffffff'; this.style.boxShadow='0 2px 3px rgba(0,0,0,0.1)'"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M17.64 9.2045C17.64 8.56364 17.5818 7.95455 17.4727 7.36364H9V10.6364H14.2182C13.9727 11.9545 13.2273 12.9955 12.1818 13.6864V15.9364H14.9909C16.6455 14.3636 17.64 12.1227 17.64 9.2045Z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M9 18C11.4318 18 13.4636 17.1955 14.9909 15.9364L12.1818 13.6864C11.4091 14.1955 10.3273 14.5227 9 14.5227C6.54545 14.5227 4.49545 12.8818 3.75455 10.6364H0.863636V12.8864C2.37273 15.8909 5.40455 18 9 18Z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M3.75455 10.6364C3.59091 10.2273 3.5 9.77273 3.5 9.29545C3.5 8.81818 3.59091 8.36364 3.75455 7.95455V5.70455H0.863636C0.309091 6.81818 0 8.00455 0 9.29545C0 10.5864 0.309091 11.7727 0.863636 12.8864L3.75455 10.6364Z"
+                    fill="#FBBC05"
+                  />
+                  <path
+                    d="M9 3.47727C10.3273 3.47727 11.5136 3.97727 12.4318 4.84091L15.0818 2.19091C13.4636 0.804545 11.4318 0 9 0C5.40455 0 2.37273 2.10909 0.863636 5.11364L3.75455 7.36364C4.49545 5.11818 6.54545 3.47727 9 3.47727Z"
+                    fill="#EA4335"
+                  />
+                </svg>
                 Login with Google
               </a>
             </div>
