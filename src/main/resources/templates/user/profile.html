@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: base_fragment(~{::title}, ~{::#content}, ~{})}"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Profile</title>
+    <title data-th-text="${loggedInUser.name} + ' | SCM'">Login Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <h1>This is user Profile</h1>
-    <h1 data-th-text="${loggedInUser.name}"></h1>
-    <form th:action="@{/logout}" method="post" style="display: inline">
-      <input
-        type="hidden"
-        th:name="${_csrf.parameterName}"
-        th:value="${_csrf.token}"
-      />
-      <button type="submit">Logout</button>
-    </form>
+    <div id="content">
+      <div>
+        <h1>Welcome to Profile page</h1>
+      </div>
+    </div>
   </body>
 </html>

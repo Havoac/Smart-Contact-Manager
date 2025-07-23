@@ -26,7 +26,8 @@ public class UserController {
 
     // dashboard
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-    public String UserDashboard() {
+    public String UserDashboard(Model model) {
+        model.addAttribute("isUserPage", true);
         return "user/dashboard";
     }
 
@@ -40,6 +41,7 @@ public class UserController {
         User user = userService.getUserByEmail(userName);
 
         model.addAttribute("loggedInUser", user);
+        model.addAttribute("isUserPage", true);
 
         return "user/profile";
     }

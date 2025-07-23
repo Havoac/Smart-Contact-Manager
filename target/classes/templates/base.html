@@ -26,12 +26,33 @@
 
     <!-- Custom css -->
     <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link rel="stylesheet" data-th-href="@{'/css/style.css'}" />
   </head>
+
   <body class="dark:bg-gray-900 dark:text-white">
-    <div th:replace="~{navbar :: navbar}"></div>
-    <div data-th-replace="${content}"></div>
+    <div th:if="${loggedInUser!=null and isUserPage==true}">
+      <div data-th-replace="~{user/sidebar::sidebar}"></div>
+    </div>
+
+    <div
+      th:classappend="${loggedInUser!=null and isUserPage==true} ? 'md:ml-64' : ''"
+    >
+      <div th:if="${loggedInUser != null}">
+        <div data-th-replace="~{user/user_navbar::user-navbar}"></div>
+      </div>
+
+      <div th:unless="${loggedInUser != null}">
+        <div data-th-replace="~{navbar :: navbar}"></div>
+      </div>
+
+      <div class="p-4">
+        <section data-th-replace="${content}"></section>
+      </div>
+    </div>
+
     <div data-th-replace="${end}"></div>
-    <!-- <div th:replace="~{footer :: footer_fragment}"></div> -->
   </body>
-  <script src="/js/Theme.js"></script> 
+
+  <script src="/js/Theme.js"></script>
+  <script src="/js/UserSidebar.js"></script>
 </html>
