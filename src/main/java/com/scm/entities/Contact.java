@@ -29,8 +29,13 @@ public class Contact {
     private String email;
     @Column(nullable = false)
     private String phoneNo;
-    private boolean isFavourite = false;
     private String address;
+    private String picture;
+    @Column
+    private String description;
+    private boolean isFavourite = false;
+    private String websiteLink;
+    private String linkedInLink;
 
     @ManyToOne
     private User user;
