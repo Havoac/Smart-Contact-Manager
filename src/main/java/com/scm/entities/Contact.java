@@ -22,7 +22,7 @@ import lombok.Setter;
 @Entity
 public class Contact {
     @Id
-    private int contactId;
+    private String contactId;
 
     @Column(nullable = false)
     private String contactName;
@@ -33,7 +33,7 @@ public class Contact {
     private String picture;
     @Column
     private String description;
-    private boolean isFavourite = false;
+    private boolean favourite = false;
     private String websiteLink;
     private String linkedInLink;
 

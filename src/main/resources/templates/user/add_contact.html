@@ -18,7 +18,7 @@
   </head>
   <body>
     <div id="content">
-      <div  style="height: 1000px">
+      <div style="height: 1000px">
         <div class="grid grid-cols-12">
           <div class="col-span-3"></div>
           <div class="col-span-12 md:col-span-6">
@@ -31,7 +31,13 @@
                 client from scm...
               </p>
 
-              <form action="" class="mt-8">
+              <form
+                action=""
+                class="mt-8"
+                data-th-action="@{'/user/contacts/add'}"
+                data-th-object="${contactForm}"
+                method="post"
+              >
                 <!-- name form -->
                 <div class="mb-3">
                   <label
@@ -47,7 +53,7 @@
                     </div>
                     <input
                       type="text"
-                      id="input-group-1"
+                      data-th-field="*{contactName}"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="name"
                     />
@@ -69,7 +75,7 @@
                     </div>
                     <input
                       type="text"
-                      id="input-group-1"
+                      data-th-field="*{email}"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="example@gmail.com"
                     />
@@ -91,7 +97,7 @@
                     </div>
                     <input
                       type="text"
-                      id="input-group-1"
+                      data-th-field="*{phoneNo}"
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="9823525525"
                     />
@@ -107,7 +113,7 @@
                     >Contact Address</label
                   >
                   <textarea
-                    id="message"
+                    data-th-field="*{address}"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Address of the contact"
@@ -123,7 +129,7 @@
                     >Contact Description</label
                   >
                   <textarea
-                    id="message"
+                    data-th-field="*{description}"
                     rows="4"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Write about your contact"
@@ -143,7 +149,7 @@
                         </div>
                         <input
                           type="text"
-                          id="input-group-1"
+                          data-th-field="*{websiteLink}"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="htt://learncodewithdurgesh.com/"
                         />
@@ -161,7 +167,7 @@
                         </div>
                         <input
                           type="text"
-                          id="input-group-1"
+                          data-th-field="*{linkedInLink}"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                           placeholder="htt://learncodewithdurgesh.com/"
                         />
@@ -188,13 +194,13 @@
 
                 <div class="flex items-center mb-3">
                   <input
-                    id="default-checkbox"
+                    th:field="*{favourite}"
                     type="checkbox"
-                    value=""
+                    id="favourite"
                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                   />
                   <label
-                    for="default-checkbox"
+                    for="favourite"
                     class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                     >Is this contact is your favorite one ?</label
                   >
