@@ -1,6 +1,7 @@
 package com.scm.controllers;
 
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,13 @@ import com.scm.entities.Contact;
 import com.scm.entities.User;
 import com.scm.forms.ContactForm;
 import com.scm.helper.Helper;
+import com.scm.message.Message;
+import com.scm.message.MessageType;
 import com.scm.services.ContactService;
 import com.scm.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/user/contacts")
@@ -39,7 +45,17 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String SaveContact(@ModelAttribute ContactForm contactForm, Authentication authentication) {
+    public String SaveContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult result,
+            Authentication authentication, HttpSession session) {
+
+        if (result.hasErrors()) {
+            session.setAttribute("message",
+                    Message.builder().content("Please correct the following errors").messageType(MessageType.red)
+                            .build());
+
+            return "user/add_contact";
+        }
+
         String userName = helper.getEmailOfLoggedInUser(authentication);
 
         User user = userService.getUserByEmail(userName);
@@ -59,6 +75,9 @@ public class ContactController {
         contact.setWebsiteLink(contactForm.getWebsiteLink());
 
         contactService.save(contact);
+
+        session.setAttribute("message",
+                Message.builder().content("New Contact has been added").messageType(MessageType.green).build());
 
         return "redirect:/user/contacts/add";
     }

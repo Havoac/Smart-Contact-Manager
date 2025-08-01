@@ -25,6 +25,9 @@
             <div
               class="card block p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
             >
+              <!-- message popup -->
+              <div data-th-replace="message :: popup_message"></div>
+
               <h1 class="text-2xl font-semibold">Add New Contact</h1>
               <p class="text-gray-500">
                 This contact will be stored on cloud, you can direct email this
@@ -57,6 +60,13 @@
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="name"
                     />
+                    <p
+                      class="text-red-500"
+                      data-th-if="${#fields.hasErrors('contactName')}"
+                      data-th-errors="*{contactName}"
+                    >
+                      Invalid name
+                    </p>
                   </div>
                 </div>
 
@@ -80,6 +90,13 @@
                       placeholder="example@gmail.com"
                     />
                   </div>
+                  <p
+                    class="text-red-500"
+                    data-th-if="${#fields.hasErrors('email')}"
+                    data-th-errors="*{email}"
+                  >
+                    Invalid email
+                  </p>
                 </div>
 
                 <!-- phone number  -->
@@ -102,6 +119,13 @@
                       placeholder="9823525525"
                     />
                   </div>
+                  <p
+                    class="text-red-500"
+                    data-th-if="${#fields.hasErrors('phoneNo')}"
+                    data-th-errors="*{phoneNo}"
+                  >
+                    Invalid Phone no
+                  </p>
                 </div>
 
                 <!-- address -->
