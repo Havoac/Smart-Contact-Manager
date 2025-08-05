@@ -48,7 +48,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Name</label
                   >
-                  <div class="relative mb-6">
+                  <div class="relative mb-1">
                     <div
                       class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
                     >
@@ -60,14 +60,14 @@
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="name"
                     />
-                    <p
-                      class="text-red-500"
-                      data-th-if="${#fields.hasErrors('contactName')}"
-                      data-th-errors="*{contactName}"
-                    >
-                      Invalid name
-                    </p>
                   </div>
+                  <p
+                    class="text-red-500 text-left text-sm mb-2"
+                    data-th-if="${#fields.hasErrors('contactName')}"
+                    data-th-errors="*{contactName}"
+                  >
+                    Name is required
+                  </p>
                 </div>
 
                 <!-- email form -->
@@ -77,7 +77,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Email</label
                   >
-                  <div class="relative mb-6">
+                  <div class="relative mb-1">
                     <div
                       class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
                     >
@@ -89,14 +89,14 @@
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="example@gmail.com"
                     />
+                    <p
+                      class="text-red-500 text-left text-sm mb-3"
+                      data-th-if="${#fields.hasErrors('email')}"
+                      data-th-errors="*{email}"
+                    >
+                      Invalid email
+                    </p>
                   </div>
-                  <p
-                    class="text-red-500"
-                    data-th-if="${#fields.hasErrors('email')}"
-                    data-th-errors="*{email}"
-                  >
-                    Invalid email
-                  </p>
                 </div>
 
                 <!-- phone number  -->
@@ -106,7 +106,7 @@
                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >Contact Phone</label
                   >
-                  <div class="relative mb-6">
+                  <div class="relative mb-1">
                     <div
                       class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
                     >
@@ -118,14 +118,14 @@
                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="9823525525"
                     />
+                    <p
+                      class="text-red-500 text-left text-sm mb-2"
+                      data-th-if="${#fields.hasErrors('phoneNo')}"
+                      data-th-errors="*{phoneNo}"
+                    >
+                      Invalid Phone no
+                    </p>
                   </div>
-                  <p
-                    class="text-red-500"
-                    data-th-if="${#fields.hasErrors('phoneNo')}"
-                    data-th-errors="*{phoneNo}"
-                  >
-                    Invalid Phone no
-                  </p>
                 </div>
 
                 <!-- address -->
