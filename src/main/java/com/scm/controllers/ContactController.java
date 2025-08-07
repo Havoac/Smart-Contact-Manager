@@ -2,6 +2,11 @@ package com.scm.controllers;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,7 @@ import com.scm.helper.Helper;
 import com.scm.message.Message;
 import com.scm.message.MessageType;
 import com.scm.services.ContactService;
+import com.scm.services.ImageService;
 import com.scm.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,10 +35,15 @@ public class ContactController {
     private ContactService contactService;
 
     @Autowired
+    private ImageService imageService;
+
+    @Autowired
     private Helper helper;
 
     @Autowired
     private UserService userService;
+
+    private Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     @RequestMapping("/add")
     public String addContactView(Model model) {
@@ -60,6 +71,9 @@ public class ContactController {
 
         User user = userService.getUserByEmail(userName);
 
+        String fileName = UUID.randomUUID().toString();
+        String fileURL = imageService.uploadImage(contactForm.getPicture(), fileName);
+
         // process the form data
 
         Contact contact = new Contact();
@@ -73,6 +87,7 @@ public class ContactController {
         contact.setUser(user);
         contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setWebsiteLink(contactForm.getWebsiteLink());
+        contact.setPicture(fileURL);
 
         contactService.save(contact);
 
