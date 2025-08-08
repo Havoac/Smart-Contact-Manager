@@ -3,6 +3,7 @@ package com.scm.controllers;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
@@ -95,5 +96,18 @@ public class ContactController {
                 Message.builder().content("New Contact has been added").messageType(MessageType.green).build());
 
         return "redirect:/user/contacts/add";
+    }
+
+    @RequestMapping
+    public String ViewContacts(Model model, Authentication authentication) {
+        model.addAttribute("isUserPage", true);
+
+        String username = helper.getEmailOfLoggedInUser(authentication);
+        User user = userService.getUserByEmail(username);
+        List<Contact> contacts = contactService.getByUser(user);
+
+        model.addAttribute("contacts", contacts);
+
+        return "user/contacts";
     }
 }

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: base_fragment(~{::title}, ~{::#content}, ~{})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-th-text="${loggedInUser.name} + ' | SCM'">Contact Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div id="content">
+      <div>
+        <h1>Welcome to All Contacts</h1>
+
+        <div class="contacts_container p-5">
+          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div
+              class="flex p-5 items-center justify-between flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 pb-4 bg-white dark:bg-gray-900"
+            >
+            
+            <table
+              class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+            >
+              <thead
+                class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+              >
+                <tr>
+                  <th scope="col" class="px-6 py-3">Name</th>
+                  <th scope="col" class="px-6 py-3">Phone</th>
+                  <th scope="col" class="px-6 py-3">Links</th>
+                  <th scope="col" class="px-6 py-3">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                
+                  data-th-object="${c}"
+                  data-th-each="c  : ${contacts}"
+                  class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <th
+                    scope="row"
+                    class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+                  >
+                    <img
+                      onerror="this.src='https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png'"
+                      class="w-10 h-10 rounded-full"
+                      data-th-src="@{*{picture}}"
+                      src="/docs/images/people/profile-picture-1.jpg"
+                      alt="Jese image"
+                    />
+                    <div class="ps-3">
+                      <div
+                        class="text-base font-semibold"
+                        data-th-text="*{contactName}"
+                      >
+                        Neil Sims
+                      </div>
+                      <div
+                        class="font-normal text-gray-500"
+                        data-th-text="*{email}"
+                      >
+                        neil.sims@flowbite.com
+                      </div>
+                    </div>
+                  </th>
+                  <td class="px-6 py-4">
+                    <i class="fa-solid fa-phone w-4 h-4"></i>
+                    <span data-th-text="*{phoneNo}"></span>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div class="flex items-center">
+                      <div
+                        data-th-if="*{favourite}"
+                        class="h-2.5 w-2.5 rounded-full bg-green-500 me-2"
+                      ></div>
+
+                      <a data-th-href="@{*{websiteLink}}" target="_blank"
+                        ><i class="fa-solid w-6 h-6 fa-link"></i
+                      ></a>
+                      <a data-th-href="@{*{linkedInLink}}" target="_blank">
+                        <i class="fa-brands w-6 h-6 fa-linkedin"></i>
+                      </a>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4">
+                    <div>
+                      <a href="">
+                        <i class="fa-solid w-6 h-6 fa-trash"></i>
+                      </a>
+                      <a href=""> <i class="fa-solid w-6 h-6 fa-pen"></i></a>
+                      <a href=""> <i class="fa-solid fa-eye"></i></a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
