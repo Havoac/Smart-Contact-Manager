@@ -72,8 +72,12 @@ public class ContactController {
 
         User user = userService.getUserByEmail(userName);
 
-        String fileName = UUID.randomUUID().toString();
-        String fileURL = imageService.uploadImage(contactForm.getPicture(), fileName);
+        String fileName = "", fileURL = "";
+
+        if (contactForm.getPicture() != null && !contactForm.getPicture().isEmpty()) {
+            fileName = UUID.randomUUID().toString();
+            fileURL = imageService.uploadImage(contactForm.getPicture(), fileName);
+        }
 
         // process the form data
 
@@ -88,6 +92,7 @@ public class ContactController {
         contact.setUser(user);
         contact.setLinkedInLink(contactForm.getLinkedInLink());
         contact.setWebsiteLink(contactForm.getWebsiteLink());
+
         contact.setPicture(fileURL);
 
         contactService.save(contact);
