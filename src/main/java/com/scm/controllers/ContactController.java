@@ -3,18 +3,20 @@ package com.scm.controllers;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.scm.constants.AppConstants;
 import com.scm.entities.Contact;
 import com.scm.entities.User;
 import com.scm.forms.ContactForm;
@@ -46,7 +48,7 @@ public class ContactController {
 
     private Logger logger = LoggerFactory.getLogger(ContactController.class);
 
-    @RequestMapping("/add")
+    @RequestMapping(value = "/add")
     public String addContactView(Model model) {
         model.addAttribute("isUserPage", true);
 
@@ -104,14 +106,19 @@ public class ContactController {
     }
 
     @RequestMapping
-    public String ViewContacts(Model model, Authentication authentication) {
+    public String ViewContacts(@RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = AppConstants.PAGE_SIZE + "") int size,
+            @RequestParam(value = "sortBy", defaultValue = "contactName") String sortBy,
+            @RequestParam(value = "direction", defaultValue = "0") String direction, Model model,
+            Authentication authentication) {
         model.addAttribute("isUserPage", true);
 
         String username = helper.getEmailOfLoggedInUser(authentication);
         User user = userService.getUserByEmail(username);
-        List<Contact> contacts = contactService.getByUser(user);
+        Page<Contact> pageContacts = contactService.getByUser(user, page, size, sortBy, direction);
 
-        model.addAttribute("contacts", contacts);
+        model.addAttribute("pageContacts", pageContacts);
+        model.addAttribute("pageSize", AppConstants.PAGE_SIZE);
 
         return "user/contacts";
     }

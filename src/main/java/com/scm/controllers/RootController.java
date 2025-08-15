@@ -18,6 +18,7 @@ public class RootController {
     private Helper helper;
 
     private Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private UserService userService;
 

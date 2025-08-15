@@ -22,47 +22,35 @@ public class PageController {
     @Autowired
     UserService userService;
 
-    // @GetMapping("/whoami")
-    // @ResponseBody
-    // public String whoAmI(Authentication auth) {
-    // return auth == null ? "Anonymous" : "Logged in as: " + auth.getName();
-    // }
-
     @RequestMapping("/")
     public String Index(Model model) {
-        // model.addAttribute("isUserPage", false);
         return "redirect:/home";
     }
 
     @RequestMapping("/home")
     public String Home(Model model) {
         model.addAttribute("home", "Welcome to the home page");
-        // model.addAttribute("isUserPage", false);
         return "home";
     }
 
     @RequestMapping("/about")
     public String About(Model model) {
         model.addAttribute("about", "Welcome to the about page");
-        // model.addAttribute("isUserPage", false);
         return "about";
     }
 
     @RequestMapping("/services")
     public String Services(Model model) {
-        // model.addAttribute("isUserPage", false);
         return "services";
     }
 
     @RequestMapping("/contact")
     public String Contact(Model model) {
-        // model.addAttribute("isUserPage", false);
         return "contact";
     }
 
     @RequestMapping("/login")
     public String Login(Model model) {
-        // model.addAttribute("isUserPage", false);
         return "login";
     }
 
@@ -70,7 +58,6 @@ public class PageController {
     public String SignUp(Model model) {
         UserForm userForm = new UserForm();
         model.addAttribute(userForm);
-        // model.addAttribute("isUserPage", false);
         return "signup";
     }
 
